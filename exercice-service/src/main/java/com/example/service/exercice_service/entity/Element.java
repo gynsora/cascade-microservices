@@ -43,26 +43,26 @@ public class Element {
 
     //creer reflexive
     @OneToMany(mappedBy = "elementSource", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RegleAssociation> relationsAsSource = new ArrayList<>();
+    private List<RegleAssociation> CoutRessource = new ArrayList<>();
 
     // @OneToMany(mappedBy = "elementEnfant", cascade = CascadeType.ALL)
     // private List<RegleAssociation> relationsAsEnfant = new ArrayList<>();
 
     //ajouter une regle d'association
-    // public void addRelation(Element elementEnfant, int quantite) {
-    //     RegleAssociation relation = new RegleAssociation(this, elementEnfant, quantite);
-    //     relationsAsSource.add(relation);
-    //    // elementEnfant.getRelationsAsEnfant().add(relation);
-    // }
+    public void addRegleAssociation(Element elementEnfant, int quantite) {
+        RegleAssociation relation = new RegleAssociation(this, elementEnfant, quantite);
+        CoutRessource.add(relation);
+       // elementEnfant.getRelationsAsEnfant().add(relation);
+    }
 
     //enlever une regle d'association
-    // public void removeRelation(Element elementEnfant) {
-    //     RegleAssociation relation = new RegleAssociation(this, elementEnfant, 0);
-    //     relationsAsSource.remove(relation);
-    //     //elementEnfant.getRelationsAsEnfant().remove(relation);
-    //     relation.setElementSource(null);
-    //     relation.setElementEnfant(null);
-    // }
+    public void removeRegleAssociation(Element elementEnfant) {
+        RegleAssociation relation = new RegleAssociation(this, elementEnfant, 0);
+        CoutRessource.remove(relation);
+        //elementEnfant.getRelationsAsEnfant().remove(relation);
+        relation.setElementSource(null);
+        //relation.setElementEnfant(null);
+    }
 
     //constructeur sans relations
     public Element(String nomElement, String imgElement, Ressource ressource){

@@ -2,6 +2,7 @@ package com.example.service.exercice_service.entity;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -30,6 +31,7 @@ public class RegleAssociation {
     
     //element parent
     @ManyToOne
+    @JsonIgnore 
     @JoinColumn(name = "elementSource_id")
     private Element elementSource;
 

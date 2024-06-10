@@ -36,7 +36,7 @@ public class ElementService {
         if (ressourceRepository.existsById(element.getRessource().getId())) {
             return elementRepository.save(element);
         } else {
-            throw new IllegalArgumentException("La Ressource n'existe pas");
+            throw new IllegalArgumentException("La ressource de cet element n'existe pas");
         }
     }
 
@@ -46,7 +46,31 @@ public class ElementService {
     }
     
 
-    //UPDATE ????
+    //ajouter une regle d'association
+    public void addRegleAssociation(Long sourceId, Long enfantId, int quantite) {
+        Optional<Element> sourceOpt = elementRepository.findById(sourceId);
+        Optional<Element> enfantOpt = elementRepository.findById(enfantId);
+
+        if (sourceOpt.isPresent() && enfantOpt.isPresent()) {
+            Element source = sourceOpt.get();
+            Element enfant = enfantOpt.get();
+            source.addRegleAssociation(enfant, quantite);
+            elementRepository.save(source);
+        }
+    }
+
+    //enlever une regle d'association
+    public void removeRegleAssociation(Long sourceId, Long enfantId) {
+        Optional<Element> sourceOpt = elementRepository.findById(sourceId);
+        Optional<Element> enfantOpt = elementRepository.findById(enfantId);
+
+        if (sourceOpt.isPresent() && enfantOpt.isPresent()) {
+            Element source = sourceOpt.get();
+            Element enfant = enfantOpt.get();
+            source.removeRegleAssociation(enfant);
+            elementRepository.save(source);
+        }
+    }
 
     
 }
