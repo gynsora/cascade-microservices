@@ -7,12 +7,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @Entity// Indique que cette classe est une entité JPA
@@ -27,12 +27,19 @@ public class Materiel {
 
     //lie a une tache
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "tache_id")
     private Tache tache;
     //lie a un element
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "element_id")
     private Element element;
 
+    private int quantite;
+
     private Boolean materielUtilisable;
+
+    // public Materiel(Tache tache, Element element,int quantite, Boolean materielUtilisable) {
+    //     this.tache = tache;
+    //     this.element  = element;
+    //     this.quantite = quantite;
+    //     this.materielUtilisable = materielUtilisable;
+    // }
 }

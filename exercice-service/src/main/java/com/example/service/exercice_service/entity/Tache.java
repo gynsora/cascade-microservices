@@ -29,13 +29,25 @@ public class Tache {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Génère automatiquement la valeur de la clé primaire
     private Long id;
 
-    
     private String nomTache;
 
-   
     //liste de materiaux //cascade ?
-    @OneToMany(  cascade = CascadeType.ALL,  orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany( cascade = CascadeType.ALL,  orphanRemoval = true)
 	@JoinColumn(name = "tache_id")
 	List<Materiel> materiaux = new ArrayList<>();
+
+    //ajout d'un nouveau materiel
+    // public void addMateriel(Element element, int quantite,Boolean materielUtilisable) {
+    //     Materiel nouveauMateriel = new Materiel(this, element, quantite,materielUtilisable);
+    //     this.materiaux.add(nouveauMateriel);
+    // }
+
+    // public void removeRelation(Element elementEnfant) {
+    //     ElementRelation relation = new ElementRelation(this, elementEnfant, 0);
+    //     relationsAsSource.remove(relation);
+    //     elementEnfant.getRelationsAsEnfant().remove(relation);
+    //     relation.setElementSource(null);
+    //     relation.setElementEnfant(null);
+    // }
 
 }
