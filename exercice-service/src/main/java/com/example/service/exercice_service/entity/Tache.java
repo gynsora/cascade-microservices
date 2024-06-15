@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+//import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,8 +32,7 @@ public class Tache {
     private String nomTache;
 
     //liste de materiaux //cascade ?
-    @OneToMany( cascade = CascadeType.ALL,  orphanRemoval = true)
-	@JoinColumn(name = "tache_id")
+    @OneToMany(mappedBy = "tache", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Materiel> materiaux = new ArrayList<>();
 
     //ajout d'un nouveau materiel
