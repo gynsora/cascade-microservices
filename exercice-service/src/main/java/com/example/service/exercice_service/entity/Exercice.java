@@ -16,13 +16,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-
+//@MappedSuperclass
+// @Entity
+// @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @Entity
+@Table(name = "Exercices") // Indique la table correspondante dans la base de données
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Exercice {
     @Id // Indique que le champ suivant est la clé primaire de l'entité
