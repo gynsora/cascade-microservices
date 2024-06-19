@@ -16,10 +16,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 //@MappedSuperclass
 // @Entity
@@ -27,6 +28,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@SuperBuilder
 @Table(name = "Exercices") // Indique la table correspondante dans la base de données
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Exercice {

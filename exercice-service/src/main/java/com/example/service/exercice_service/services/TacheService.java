@@ -25,8 +25,7 @@ public class TacheService {
     @Autowired
     private MaterielRepository materielRepository ;
 
-    // @Autowired
-    // private ElementRepository elementRepository ;
+
 
 
     public List<Tache> getAllTaches() {
@@ -65,4 +64,6 @@ public class TacheService {
             materielRepository.delete(materiel);
         }
     }
+
+    
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.service.eleve_service.entity.Eleve;
+import com.example.service.eleve_service.entity.ResultatExercice;
 import com.example.service.eleve_service.services.EleveService;
 
 @RestController
@@ -49,5 +50,17 @@ public class EleveController {
         eleveService.deleteEleve(id);
         return ResponseEntity.noContent().build();
     }
+
+    //On ajoute ce code pour ajouter des materiels pour une tache donnee
+    @PostMapping("/{eleveId}/resultatsExercices")
+    public ResponseEntity<?> addResultatExerciceToEleve(@PathVariable Long eleveId, @RequestBody List<ResultatExercice> resultatExercices) {
+        eleveService.addResultatExerciceToEleve(eleveId, resultatExercices);
+        return ResponseEntity.ok().build();
+    }
     
+     // effacer un materiel d'une tache
+    @DeleteMapping("/{eleveId}/resultatsExercices/{resultatExerciceId}")
+    public void removeResultatExerciceFromEleve(@PathVariable Long eleveId, @PathVariable Long resultatExerciceId) {
+        eleveService.removeResultatExerciceFromEleve(eleveId, resultatExerciceId);
+    }
 }
