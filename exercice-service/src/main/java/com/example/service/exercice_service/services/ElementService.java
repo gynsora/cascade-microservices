@@ -30,10 +30,11 @@ public class ElementService {
         return elementRepository.findById(id);
     }
 
-    //save A CHANGER
+    //save 
     public Element addElement(Element element) {
         // Vérifiez que la ressource existe
         if (ressourceRepository.existsById(element.getRessource().getId())) {
+            validateElement(element);
             return elementRepository.save(element);
         } else {
             throw new IllegalArgumentException("La ressource de cet element n'existe pas");
@@ -69,6 +70,20 @@ public class ElementService {
             Element enfant = enfantOpt.get();
             source.removeRegleAssociation(enfant);
             elementRepository.save(source);
+        }
+    }
+
+    public void validateElement(Element element){
+        if (element.getNomElement() == null || element.getNomElement().trim().isEmpty()) {
+            throw new RuntimeException("Le nom de l'élément est obligatoire");
+        }
+        //on cherche si le nom de l'element est deja dans la bdd
+        Optional<Element> elementAvecNomExistant = elementRepository.findByNomElement(element.getNomElement());
+        if(elementAvecNomExistant.isPresent() ){
+            Element elementSource = elementAvecNomExistant.get();
+            if(elementSource.getId() != element.getId()){ // Pour la mise a jour on regarde si le nom de l'element (deja dans la bdd), à le meme Id que l'element a modifier, si oui pas de soucis, sinon a on a probleme
+                throw new RuntimeException("Le nom de l'élément est deja présent dans la BDD");
+            }
         }
     }
 

@@ -62,11 +62,11 @@ public class EleveService {
     public Eleve updateEleve(Long id, Eleve eleveDetails) {
         validateEleve(eleveDetails);
         try{
-            Eleve eleve = eleveRepository.findById(id).orElseThrow(() -> new RuntimeException("Eleve not found"));
+            Eleve eleve = eleveRepository.findById(id).orElseThrow(() -> new RuntimeException("Eleve non existant"));
             eleve.setNom(eleveDetails.getNom());
             eleve.setPrenom(eleveDetails.getPrenom());
             eleve.setSexe(eleveDetails.getSexe());
-            eleve.setEmail(eleveDetails.getEmail());
+            eleve.setEmail(eleveDetails.getEmail()); 
             eleve.setNiveau(eleveDetails.getNiveau());
             //securiser le mdp
             eleve.setMdp(eleveDetails.getMdp());
@@ -96,7 +96,8 @@ public class EleveService {
             resultatExerciceRepository.delete(resultatExercice);
         }
     }
-   
+    
+    //verfie les attribut de l'eleve
     private void validateEleve(Eleve eleve) {
         if (eleve.getNom() == null || eleve.getNom().trim().isEmpty()) {
             throw new RuntimeException("Le nom est obligatoire");
@@ -118,4 +119,5 @@ public class EleveService {
         }
         // Add more validation rules as needed
     }
+
 }

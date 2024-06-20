@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.service.exercice_service.repository.CategorieRepository;
-
-
-
 import com.example.service.exercice_service.entity.Categorie;
 
 @Service
@@ -31,6 +28,7 @@ public class CategorieService {
 
     //save
     public Categorie addCategorie(Categorie categorie) {
+        validateCategorie(categorie);
         return categorieRepository.save(categorie);
     }
 
@@ -39,15 +37,14 @@ public class CategorieService {
         categorieRepository.deleteById(id);
     }
 
-    //update ??
-    // public Categorie updateCategorie(Long id, Categorie updatedCategorie) { 
-    //     Optional<Categorie> existingCategorie = categorieRepository.findById(id);
-    //     if (!existingCategorie.isPresent()) {
-    //         throw new IllegalArgumentException("Categorie with this ID does not exist");
-    //     }
-    //     Categorie categorie = existingCategorie.get();
-    //     categorie.setNomCategorie(updatedCategorie.getNomCategorie());
-    //     categorie.setImgCategorie(updatedCategorie.getImgCategorie());
-    //     return categorieRepository.save(categorie);
-    // }
+    
+
+    private void validateCategorie(Categorie categorie) {
+        if (categorie.getNomCategorie() == null || categorie.getNomCategorie().trim().isEmpty()) {
+            throw new RuntimeException("Le nom de la catégorie est obligatoire");
+        }
+        if(categorieRepository.findByNomCategorie(categorie.getNomCategorie()).isPresent()){
+            throw new RuntimeException("Le nom de la catégorie doit être unique");
+        }
+    }
 }
