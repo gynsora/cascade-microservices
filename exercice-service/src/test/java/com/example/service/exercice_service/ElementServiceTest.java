@@ -1,10 +1,12 @@
 package com.example.service.exercice_service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -68,7 +70,29 @@ public class ElementServiceTest {
         assertEquals("poule", elements.get(1).getNomElement());
     }
 
+    @Test
+    void testGetElementById(){
+        //creation des ressources
+        Ressource ressource1 = new Ressource();
+        ressource1.setId(1L);
+        ressource1.setNomRessource("composants");
+        ressource1.setGradeRessource(1);
 
+        //creation Element
+        Element element1 = new Element();
+        element1.setId(1L);
+        element1.setNomElement("oeuf");
+        element1.setImgElement("oeuf.png");
+        element1.setRessource(ressource1);
+
+        when(elementRepository.findById(anyLong())).thenReturn(Optional.of(element1));
+
+        Optional<Element> foundElement = elementRepository.findById(1L);
+
+        assertEquals(true, foundElement.isPresent());
+        assertEquals("oeuf", foundElement.get().getNomElement());
+
+    }
 
 
 }

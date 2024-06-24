@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +40,8 @@ public abstract class Exercice {
 
     private String niveauExercice;
     private String typeExercice ;
+    @Column(nullable = false, unique = true)
+    private String nomExercice;
     
     //creer une categories categorie (exercices)
     @ManyToOne(fetch = FetchType.LAZY)
